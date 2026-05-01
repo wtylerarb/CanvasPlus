@@ -37,9 +37,7 @@ function loadStorage() {
  * @returns a Promise that returns a resolve if a successful save has taken place and throws an error if it fails.
  */
 function saveStorage(shadowTasks, taskPriorities, coursePriorities) {
-function saveStorage(shadowTasks, taskPriorities, coursePriorities) {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.set({ shadowTasks, taskPriorities, coursePriorities }, () => {
     chrome.storage.local.set({ shadowTasks, taskPriorities, coursePriorities }, () => {
       if (chrome.runtime.lastError) {
         console.error('[Versatile] saveStorage failed:', chrome.runtime.lastError.message);
