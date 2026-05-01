@@ -7,7 +7,7 @@
 function loadStorage() {
   return new Promise(resolve => {
     chrome.storage.local.get(
-      ['shadowTasks', 'taskPriorities', 'coursePriorities', 'sidebarCollapsed', 'sortMode',
+      ['shadowTasks', 'taskPriorities', 'coursePriorities', 'courseSortMode', 'sidebarCollapsed', 'sortMode',
         'courseNotes', 'dismissedNotifications', 'courseLinks', 'customDueDates', 'theme', 'hiddenTopics'],
       result => {
         resolve({
@@ -16,6 +16,8 @@ function loadStorage() {
           coursePriorities: result.coursePriorities || {},
           sidebarCollapsed: result.sidebarCollapsed || false,
           sortMode: result.sortMode || 'date',
+          coursePriorities: result.coursePriorities || {},
+          courseSortMode: result.courseSortMode || 'az',
           courseNotes: result.courseNotes || {},
           dismissedNotifications: result.dismissedNotifications || {},
           courseLinks: result.courseLinks || {},
@@ -35,7 +37,9 @@ function loadStorage() {
  * @returns a Promise that returns a resolve if a successful save has taken place and throws an error if it fails.
  */
 function saveStorage(shadowTasks, taskPriorities, coursePriorities) {
+function saveStorage(shadowTasks, taskPriorities, coursePriorities) {
   return new Promise((resolve, reject) => {
+    chrome.storage.local.set({ shadowTasks, taskPriorities, coursePriorities }, () => {
     chrome.storage.local.set({ shadowTasks, taskPriorities, coursePriorities }, () => {
       if (chrome.runtime.lastError) {
         console.error('[Versatile] saveStorage failed:', chrome.runtime.lastError.message);
