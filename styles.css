@@ -669,7 +669,7 @@ body.dark-mode .cp-task-date {
 }
 
 body.dark-mode .vtask-due-edit-input {
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
     color: #6091b3;
     background: #3d2358;
 }
@@ -702,7 +702,7 @@ body.dark-mode .cp-add-link-btn:hover {
 body.dark-mode #versatile-add-task-form,
 body.dark-mode .cp-add-link-form {
     background: #3d2358;
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
 }
 
 body.dark-mode #versatile-add-task-form input,
@@ -710,7 +710,7 @@ body.dark-mode #versatile-add-task-form textarea,
 body.dark-mode .cp-add-link-form input {
     color: #9fc0db;
     background-color: #5f3a72;
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
 }
 
 body.dark-mode #vtask-submit,
@@ -719,7 +719,7 @@ body.dark-mode .cp-link-save-btn {
 }
 
 body.dark-mode #vtask-cancel {
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
     color: #9fc0db;
 }
 
@@ -739,7 +739,7 @@ body.dark-mode #vtask-week-label {
 body.dark-mode #versatile-sort-btn,
 body.dark-mode #versatile-course-sort-btn {
     color: #9fc0db;
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
 }
 
 body.dark-mode #versatile-sort-btn:hover,
@@ -787,7 +787,7 @@ body.dark-mode .cp-topic-card--clickable:hover {
 }
 
 body.dark-mode .cp-back-btn {
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
 }
 
 body.dark-mode .cp-back-btn:hover {
@@ -798,7 +798,7 @@ body.dark-mode .cp-back-btn:hover {
 body.dark-mode .cp-notes-textarea {
     color: #9fc0db;
     background-color: #5f3a72;
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
 }
 
 body.dark-mode .cp-notes-status {
@@ -807,7 +807,7 @@ body.dark-mode .cp-notes-status {
 
 body.dark-mode .vtask-course-dropdown {
     background: #3d2358;
-    border: 1px solid #2c1445;
+    border: 1px solid #becbe0;
 }
 
 body.dark-mode .vtask-course-option {
