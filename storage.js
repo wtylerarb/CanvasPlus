@@ -7,7 +7,7 @@
 function loadStorage() {
   return new Promise(resolve => {
     chrome.storage.local.get(
-      ['shadowTasks', 'taskPriorities', 'coursePriorities', 'sidebarCollapsed', 'sortMode',
+      ['shadowTasks', 'taskPriorities', 'coursePriorities', 'courseSortMode', 'sidebarCollapsed', 'sortMode',
         'courseNotes', 'dismissedNotifications', 'courseLinks', 'customDueDates', 'theme', 'hiddenTopics'],
       result => {
         resolve({
@@ -16,6 +16,8 @@ function loadStorage() {
           coursePriorities: result.coursePriorities || {},
           sidebarCollapsed: result.sidebarCollapsed || false,
           sortMode: result.sortMode || 'date',
+          coursePriorities: result.coursePriorities || {},
+          courseSortMode: result.courseSortMode || 'az',
           courseNotes: result.courseNotes || {},
           dismissedNotifications: result.dismissedNotifications || {},
           courseLinks: result.courseLinks || {},
