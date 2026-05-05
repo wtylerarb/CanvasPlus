@@ -8,7 +8,7 @@ function loadStorage() {
   return new Promise(resolve => {
     chrome.storage.local.get(
       ['shadowTasks', 'taskPriorities', 'coursePriorities', 'courseSortMode', 'sidebarCollapsed', 'sortMode',
-        'courseNotes', 'dismissedNotifications', 'courseLinks', 'customDueDates', 'theme', 'hiddenTopics'],
+        'courseNotes', 'dismissedNotifications', 'courseLinks', 'customDueDates', 'theme', 'hiddenTopics', 'completedTasks'],
       result => {
         resolve({
           shadowTasks: result.shadowTasks || [],
@@ -23,7 +23,8 @@ function loadStorage() {
           courseLinks: result.courseLinks || {},
           customDueDates: result.customDueDates || {},
           theme: result.theme || 'light',
-          hiddenTopics: result.hiddenTopics || []
+          hiddenTopics: result.hiddenTopics || [],
+          completedTasks: result.completedTasks || {}
         });
       }
     );
@@ -113,6 +114,24 @@ function saveHiddenTopics(hiddenTopics) {
     chrome.storage.local.set({ hiddenTopics }, () => {
       if (chrome.runtime.lastError) {
         console.error('[Versatile] saveHiddenTopics failed:', chrome.runtime.lastError.message);
+        reject(new Error(chrome.runtime.lastError.message));
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+/**
+ * An asynchronous function that saves completed task IDs to Chrome's LocalStorage.
+ * @param {*} completedTasks
+ * @returns a Promise that returns a resolve if a successful save has taken place and throws an error if it fails.
+ */
+function saveCompletedTasks(completedTasksData) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.set({ completedTasks: completedTasksData }, () => {
+      if (chrome.runtime.lastError) {
+        console.error('[Versatile] saveCompletedTasks failed:', chrome.runtime.lastError.message);
         reject(new Error(chrome.runtime.lastError.message));
       } else {
         resolve();

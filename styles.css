@@ -67,6 +67,48 @@ body:not(.versatile-hidden) #right-side {
     /* Red  */
 }
 
+/* Completed task state */
+.task-completed {
+    background-color: #f0f2f4;
+    opacity: 0.75;
+}
+
+.task-completed .cp-title,
+.task-completed .cp-title-name {
+    text-decoration: line-through;
+    color: #8a9ba8;
+}
+
+.task-completed .cp-task-date {
+    color: #aab5bc;
+}
+
+/* Complete / Undo button */
+.vtask-complete-btn {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #2d7a22;
+    background: none;
+    border: 1px solid #2d7a22;
+    border-radius: 3px;
+    padding: 2px 7px;
+    cursor: pointer;
+}
+
+.vtask-complete-btn:hover {
+    background-color: #e6f4e6;
+}
+
+.vtask-complete-btn-done {
+    color: #8a9ba8;
+    border-color: #c7cdd1;
+}
+
+.vtask-complete-btn-done:hover {
+    background-color: #e8ecef;
+    color: #556572;
+}
+
 /* Topic Cards (Topics) */
 .cp-topic-card {
     background-color: #ffffff;
@@ -361,7 +403,8 @@ body:not(.versatile-hidden) #right-side {
 }
 
 #versatile-sort-btn,
-#versatile-course-sort-btn {
+#versatile-course-sort-btn,
+#versatile-detail-sort-btn {
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -375,13 +418,15 @@ body:not(.versatile-hidden) #right-side {
 }
 
 #versatile-sort-btn:hover,
-#versatile-course-sort-btn:hover {
+#versatile-course-sort-btn:hover,
+#versatile-detail-sort-btn:hover {
     background-color: #e0e6e9;
     color: #2d3b45;
 }
 
 #versatile-sort-btn.vtask-sort-active,
-#versatile-course-sort-btn.vtask-sort-active {
+#versatile-course-sort-btn.vtask-sort-active,
+#versatile-detail-sort-btn.vtask-sort-active {
     background-color: #2d3b45;
     color: #ffffff;
     border-color: #2d3b45;
@@ -691,6 +736,38 @@ body.dark-mode .vtask-dot-active {
 }
 
 body.dark-mode .vtask-badge {
+    color: #9fc0db;
+}
+
+body.dark-mode .task-completed {
+    background-color: #2a1640;
+}
+
+body.dark-mode .task-completed .cp-title,
+body.dark-mode .task-completed .cp-title-name {
+    color: #5a6a78;
+}
+
+body.dark-mode .task-completed .cp-task-date {
+    color: #4a5a68;
+}
+
+body.dark-mode .vtask-complete-btn {
+    color: #5dab50;
+    border-color: #5dab50;
+}
+
+body.dark-mode .vtask-complete-btn:hover {
+    background-color: #1e3d1a;
+}
+
+body.dark-mode .vtask-complete-btn-done {
+    color: #5a6a78;
+    border-color: #3a2a50;
+}
+
+body.dark-mode .vtask-complete-btn-done:hover {
+    background-color: #3d2358;
     color: #9fc0db;
 }
 
