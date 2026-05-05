@@ -9,6 +9,7 @@ const PRIORITY_RANK = { xtrm: 0, med: 1, low: 2 };
 let sortMode = 'date'; // 'date' | 'priority'
 let weekOffset = 0;
 let rawCanvasTasks = [];
+let completedTasks = {};
 
 /**
  * Sorts a list of tasks by the current sortMode (date or priority).
@@ -41,8 +42,9 @@ function sortTasks(tasks, taskPriorities) {
  */
 function buildTaskCard(task, taskPriorities, canvasTasks, shadowTasks, refreshCallback, customDueDates = {}) {
   const priority = taskPriorities[task.id] || null;
+  const isCompleted = !!completedTasks[task.id];
   const card = document.createElement('div');
-  card.className = 'cp-task-card' + (priority ? ` priority-${priority}` : '');
+  card.className = 'cp-task-card' + (priority ? ` priority-${priority}` : '') + (isCompleted ? ' task-completed' : '');
 
   // Build card structure via DOM — avoids XSS from task.id in attribute context
   // and from formatDueDate output in innerHTML
@@ -69,6 +71,22 @@ function buildTaskCard(task, taskPriorities, canvasTasks, shadowTasks, refreshCa
   });
   card.appendChild(priorityRow);
 
+  const completeBtn = document.createElement('button');
+  completeBtn.className = 'vtask-complete-btn' + (isCompleted ? ' vtask-complete-btn-done' : '');
+  completeBtn.textContent = isCompleted ? 'Undo' : 'Mark done';
+  completeBtn.addEventListener('click', async () => {
+    const nowCompleted = !completedTasks[task.id];
+    if (nowCompleted) {
+      completedTasks[task.id] = true;
+    } else {
+      delete completedTasks[task.id];
+    }
+    await saveCompletedTasks(completedTasks);
+    card.classList.toggle('task-completed', nowCompleted);
+    completeBtn.classList.toggle('vtask-complete-btn-done', nowCompleted);
+    completeBtn.textContent = nowCompleted ? 'Undo' : 'Mark done';
+  });
+
   if (task.source === 'shadow') {
     const deleteActionsRow = document.createElement('div');
     deleteActionsRow.className = 'vtask-actions-row';
@@ -78,6 +96,7 @@ function buildTaskCard(task, taskPriorities, canvasTasks, shadowTasks, refreshCa
     deleteBtn.title = 'Delete custom task';
     deleteBtn.textContent = 'Delete';
     deleteActionsRow.appendChild(deleteBtn);
+    deleteActionsRow.appendChild(completeBtn);
     card.appendChild(deleteActionsRow);
   }
 
@@ -149,6 +168,7 @@ function buildTaskCard(task, taskPriorities, canvasTasks, shadowTasks, refreshCa
     if (task.isCustomDue) {
       actionsRow.appendChild(resetBtn);
     }
+    actionsRow.appendChild(completeBtn);
 
     card.appendChild(actionsRow);
 
@@ -187,6 +207,7 @@ function buildTaskCard(task, taskPriorities, canvasTasks, shadowTasks, refreshCa
         if (task.isCustomDue) {
           actionsRow.appendChild(resetBtn);
         }
+        actionsRow.appendChild(completeBtn);
       });
     });
   }

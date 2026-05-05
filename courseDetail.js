@@ -66,10 +66,27 @@ function renderDetailTasks(course, context, container) {
   const section = document.createElement('div');
   section.className = 'cp-section';
 
+  const headerEl = document.createElement('div');
+  headerEl.className = 'vtask-section-header';
+
   const titleEl = document.createElement('div');
   titleEl.className = 'section-title';
   titleEl.textContent = 'Tasks';
-  section.appendChild(titleEl);
+
+  const sortBtn = document.createElement('button');
+  sortBtn.id = 'versatile-detail-sort-btn';
+  sortBtn.textContent = sortMode === 'date' ? 'DATE' : 'PRIORITY';
+  sortBtn.classList.toggle('vtask-sort-active', sortMode === 'priority');
+  sortBtn.title = sortMode === 'date' ? 'Sort by priority' : 'Sort by date';
+  sortBtn.addEventListener('click', () => {
+    sortMode = sortMode === 'date' ? 'priority' : 'date';
+    chrome.storage.local.set({ sortMode });
+    openCourseDetail(course, context);
+  });
+
+  headerEl.appendChild(titleEl);
+  headerEl.appendChild(sortBtn);
+  section.appendChild(headerEl);
 
   const { start, end } = getWeekBounds(weekOffset);
   const filteredShadow = shadowTasks.filter(t => {

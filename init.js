@@ -44,7 +44,7 @@ async function initVersatile() {
 
     const {
       shadowTasks, taskPriorities, coursePriorities, sidebarCollapsed, sortMode: savedSortMode, courseSortMode: savedCourseSortMode,
-      courseNotes, dismissedNotifications, courseLinks, customDueDates, theme, hiddenTopics
+      courseNotes, dismissedNotifications, courseLinks, customDueDates, theme, hiddenTopics, completedTasks: savedCompletedTasks
     } = storageData;
     rawCanvasTasks = rawItems || [];
     let canvasTasks = filterCanvasItems(rawCanvasTasks, weekOffset, customDueDates);
@@ -103,6 +103,7 @@ async function initVersatile() {
     });
 
     sortMode = savedSortMode;
+    completedTasks = savedCompletedTasks;
 
     // Sort button toggle
     const sortBtn = document.getElementById('versatile-sort-btn');
